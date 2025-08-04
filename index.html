@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerita Cinta Kita</title>
+    <style>
+        :root {
+            --rose-primary: #c93756;
+            --rose-light: #f8d7da;
+            --rose-dark: #9d2933;
+            --white-primary: #ffffff;
+            --white-secondary: #f9f9f9;
+            --text-dark: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        body {
+            background-color: var(--white-secondary);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--rose-primary), var(--rose-dark));
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--white-primary);
+            text-decoration: none;
+            margin-right: 20px; /* Space between logo and nav on larger screens */
+        }
+        
+        .logo span {
+            color: var(--rose-light);
+        }
+        
+        nav {
+            flex-grow: 1; /* Allow navigation to take available space */
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center; /* Changed to center for horizontal alignment */
+            flex-wrap: wrap; /* Allow nav items to wrap */
+            gap: 20px; /* Added gap for spacing between items */
+        }
+        
+        nav ul li {
+            /* margin-left: 20px; Removed individual margins for gap property */
+            margin-bottom: 5px; /* Add a small margin for wrapped items */
+            margin-top: 5px;
+        }
+        
+        nav ul li a {
+            color: var(--white-primary);
+            text-decoration: none;
+            font-size: 16px; /* Slightly smaller font for more items */
+            transition: all 0.3s ease;
+            padding: 5px 0; /* Add padding for better click area */
+        }
+        
+        nav ul li a:hover {
+            color: var(--rose-light);
+        }
+
+        /* Responsive adjustments for navigation */
+        @media (max-width: 1024px) {
+            nav ul {
+                justify-content: center; /* Center align nav items when wrapped */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start; /* Align items to the start when stacked */
+            }
+
+            .logo {
+                margin-bottom: 15px; /* Space below logo */
+            }
+
+            nav {
+                width: 100%; /* Nav takes full width */
+            }
+            
+            nav ul {
+                flex-direction: column; /* Stack nav items vertically */
+                align-items: center; /* Center align stacked nav items */
+            }
+
+            nav ul li {
+                margin: 10px 0; /* More vertical space between stacked items */
+            }
+
+            nav ul li a {
+                font-size: 18px; /* Larger font for stacked items */
+            }
+        }
+        
+        /* Login Form Styles */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--white-primary);
+        }
+        
+        .login-form {
+            background-color: var(--white-primary);
+            padding: 40px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--rose-primary);
+            font-size: 24px;
+            font-weight: 500;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 400;
+            font-size: 14px;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: var(--white-primary);
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--rose-primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(201, 55, 86, 0.1);
+        }
+        
+        .login-button, .calculate-button, .quiz-button, .game-button, .reunion-button, .mood-booster-button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--rose-primary);
+            color: var(--white-primary);
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .calculate-button, .quiz-button, .game-button, .reunion-button, .mood-booster-button {
+            margin-top: 20px;
+        }
+        
+        .login-button:hover, .calculate-button:hover, .quiz-button:hover, .game-button:hover, .reunion-button:hover, .mood-booster-button:hover {
+            background-color: var(--rose-dark);
+        }
+
+        /* Main Content Styles - Initially Hidden */
+        .main-content {
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--rose-primary);
+        }
+
+        .hero-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Section Content */
+        .section {
+            padding: 60px 0;
+            display: none;
+        }
+
+        .section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--rose-primary);
+            font-size: 32px;
+        }
+
+        .section-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .section-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .section-text p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .section-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .section-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            padding: 15px;
+            background-color: var(--white-primary);
+            text-align: center;
+            font-size: 14px;
+            color: var(--rose-primary);
+            font-weight: 500;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--rose-light);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--white-primary);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .timeline-date {
+            color: var(--rose-primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--white-primary);
+            right: -10px;
+            top: 20px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--white-primary) transparent transparent;
+            left: -10px;
+            top: 20px;
+        }
+
+        /* Quote Section */
+        .quote-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .quote-card {
+            background-color: var(--white-primary);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .quote-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .quote-text {
+            font-style: italic;
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .quote-author {
+            text-align: right;
+            color: var(--rose-primary);
+            font-weight: 500;
+        }
+
+        /* Love Meter Section */
+        .love-meter-results, .quiz-results, .game-results, .reunion-game-results, .mood-booster-results {
+            background-color: var(--white-primary);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .love-meter-results h3, .quiz-results h3, .game-results h3, .reunion-game-results h3, .mood-booster-results h3 {
+            color: var(--rose-primary);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .result-item {
+            margin-bottom: 15px;
+        }
+
+        .result-item p {
+            font-size: 18px;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .result-item strong {
+            color: var(--rose-dark);
+            font-size: 22px;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--rose-primary), var(--rose-dark));
+            color: var(--white-primary);
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--white-primary);
+            margin: 0 10px;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--rose-light);
+        }
+
+        .copyright {
+            font-size: 14px;
+        }
+
+        /* Active Nav Link */
+        nav ul li.active a {
+            color: var(--rose-light);
+            font-weight: 600;
+        }
+
+        /* Error Message */
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        /* Quiz Specific Styles */
+        .quiz-form {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: var(--white-primary);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        .quiz-question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        .quiz-question:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .quiz-question p {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--rose-dark);
+            margin-bottom: 15px;
+        }
+        .quiz-question .input-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .quiz-question .input-group div {
+            flex: 1;
+        }
+        .quiz-question .input-group label {
+            font-size: 14px;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+            display: block;
+        }
+        .quiz-question .input-group input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .quiz-results-detail {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            text-align: left;
+        }
+        .quiz-results-detail h4 {
+            color: var(--rose-primary);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .quiz-results-detail ul {
+            list-style: none;
+        }
+        .quiz-results-detail li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .quiz-results-detail .correct {
+            color: green;
+        }
+        .quiz-results-detail .incorrect {
+            color: red;
+        }
+
+        /* Si Ganteng Si Cantik Game Styles */
+        .game-area {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: var(--white-primary);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .game-area p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--rose-dark);
+        }
+        .game-choices {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .game-choice-item {
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+        .game-choice-item:hover {
+            border-color: var(--rose-primary);
+            box-shadow: 0 0 10px rgba(201, 55, 86, 0.3);
+        }
+        .game-choice-item img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--rose-light);
+        }
+        .game-choice-item span {
+            display: block;
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .game-message {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .game-message.win {
+            color: green;
+        }
+        .game-message.lose {
+            color: red;
+        }
+
+        /* NEW: Can We Get Back Together Game Styles */
+        .reunion-game-area {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: var(--white-primary);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .reunion-game-area p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--rose-dark);
+        }
+        .reunion-game-choices {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .reunion-game-choices button {
+            flex: 1;
+            max-width: 200px;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: 2px solid var(--rose-primary);
+            background-color: var(--rose-primary);
+            color: var(--white-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .reunion-game-choices button:hover {
+            background-color: var(--rose-dark);
+            border-color: var(--rose-dark);
+        }
+        .reunion-game-message {
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .reunion-game-message.win {
+            color: green;
+        }
+        .reunion-game-message.lose {
+            color: red;
+        }
+
+        /* Mood Booster Styles */
+        .mood-booster-area {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: var(--white-primary);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .mood-booster-area p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--rose-dark);
+        }
+        .mood-booster-choices {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .mood-booster-choices button {
+            flex: 1;
+            max-width: 200px;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: 2px solid var(--rose-primary);
+            background-color: var(--rose-primary);
+            color: var(--white-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .mood-booster-choices button:hover {
+            background-color: var(--rose-dark);
+            border-color: var(--rose-dark);
+        }
+        .mood-booster-content {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .mood-booster-question {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--rose-primary);
+            margin-bottom: 15px;
+        }
+        .mood-booster-input-group {
+            margin-bottom: 20px;
+        }
+        .mood-booster-input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: var(--text-dark);
+        }
+        .mood-booster-input-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .mood-booster-answer {
+            font-size: 18px;
+            color: var(--rose-dark);
+            margin-top: 15px;
+            font-style: italic;
+        }
+        .mood-booster-navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        .mood-booster-navigation-buttons button {
+            width: 48%;
+            padding: 12px;
+            background-color: var(--rose-primary);
+            color: var(--white-primary);
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .mood-booster-navigation-buttons button:hover {
+            background-color: var(--rose-dark);
+        }
+        .mood-booster-final-message {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--rose-dark);
+            margin-top: 30px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Cerita<span>Cinta</span>Kita</a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link" data-section="home">Beranda</a></li>
+                    <li><a href="#" class="nav-link" data-section="first-meet">Pertemuan Pertama</a></li>
+                    <li><a href="#" class="nav-link" data-section="dating">Masa Pacaran</a></li>
+                    <li><a href="#" class="nav-link" data-section="wedding">Wedding Dreams</a></li>
+                    <li><a href="#" class="nav-link" data-section="quotes">Kutipan Cinta</a></li>
+                    <li><a href="#" class="nav-link" data-section="love-meter">Love Meter</a></li> 
+                    <li><a href="#" class="nav-link" data-section="knowledge-quiz">Kuis Pasangan</a></li>
+                    <li><a href="#" class="nav-link" data-section="s_g_s_c_game">Si Ganteng & Si Cantik</a></li>
+                    <li><a href="#" class="nav-link" data-section="reunion-game">Can we get back together?</a></li>
+                    <li><a href="#" class="nav-link" data-section="mood-booster">Mood Booster</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="login-container">
+        <div class="login-form">
+            <h2>Masuk ke Akun</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Nama Pengguna</label>
+                    <input type="text" id="username" placeholder="sicantik/siganteng" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Kata Sandi</label>
+                    <input type="password" id="password" placeholder="Masukkan password" required>
+                </div>
+                <button type="submit" class="login-button">Masuk</button>
+                <div class="error-message" id="errorMessage">Username atau password salah</div>
+            </form>
+        </div>
+    </div>
+
+    <div class="main-content container">
+        <section id="home" class="section">
+            <div class="hero">
+                <h1>Menemukanmu</h1>
+                <img src=""Pasangan romantis" class="hero-image">
+                <p>Setiap kisah cinta itu indah, tapi kisah kita adalah favoritku. Ini adalah cerita tentang bagaimana dua jiwa menemukan satu sama lain di alam semesta yang luas ini dan menciptakan ikatan yang melampaui waktu dan ruang.</p>
+            </div>
+            
+            <div class="section-content">
+                <div class="section-text">
+                    <p>Di dunia dengan miliaran orang, menemukan seseorang yang benar-benar memahamimu tidak kurang dari sebuah keajaiban. Kisah kita bermula seperti kisah lainnya, dengan pertemuan tak terduga yang berkembang menjadi sesuatu yang luar biasa. Saat mata kita pertama kali bertemu, sesuatu dalam diriku tahu bahwa ini berbeda, bahwa kamu berbeda.</p>
+                    
+                    <p>Cinta bukan tentang gestur besar atau momen sempurna. Cinta adalah tentang hal-hal kecil - cara kamu tersenyum ketika mencoba tidak tertawa, cara matamu bersinar saat berbicara tentang passionmu, cara kamu memegang tanganku seolah tak ingin melepaskannya. Inilah momen-momen yang membentuk kisah cinta kita.</p>
+                    
+                    <p>Melalui semua suka dan duka, tawa dan air mata, satu hal yang tetap konstan - cinta yang kita bagi. Ini adalah jenis cinta yang memberimu keberanian ketika takut, kekuatan ketika lemah, dan harapan ketika hilang. Ini adalah jenis cinta yang membuat setiap hari layak untuk dijalani.</p>
+                    
+                    <p>Mereka bilang cinta itu sabar, cinta itu murah hati. Tapi cinta juga penuh gairah dan semangat, liar dan bebas. Ini tentang momen-momen tenang saling memahami dan deklarasi penuh dedikasi. Cinta kita adalah semua ini dan lebih - ini adalah esensi dari siapa kita bersama.</p>
+                    
+                    <p>Saat kita terus menulis kisah kita, satu bab demi satu, aku diingatkan betapa beruntungnya aku menemukanmu. Tak peduli apa yang terjadi di masa depan, aku tahu selama kita bersama, kita bisa menghadapi apapun. Ini adalah kisah cinta kita, dan ini baru saja dimulai.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="first-meet" class="section">
+            <h2>First Impression, First Love and love at first sight</h2>
+            <div class="section-content">
+                <div class="section-text">
+                    <p>Pertemuan ini bedada di titik ketidaksengajaan dan takdir tuhan untuk mempertemukan 2 insan yang indah ini.</p>
+
+                    <p>Hari kita bertemu terukir dalam ingatanku seperti adegan dari film favorit. Itu hari biasa yang menjadi luar biasa saat kamu melewati aku dan temanku. Aku ingat bagaimana bidadari lewat di depan mataku, aku berkata dalam hati "bagaimana seseorang mempunyai mata seindah ini?", dan bagaimana jantungku berdebar sebelum aku bahkan tahu namamu.</p>
+                    
+                    <p>Percakapan pertama kita seperti menemukan bagian dari diriku yang tak kusadari hilang. Kata-kata mengalir lancar di antara kita, seolah kita sudah saling mengenal seumur hidup daripada baru beberapa menit. Ada koneksi instan, pengakuan jiwa sejenis yang melampaui logika dan penjelasan.</p>
+                    
+                    <p>Aku takkan pernah lupa bagaimana kamu tertawa pada lelucon konyolku, bukan karena kesopanan tapi karena benar-benar terhibur. Pada saat itulah aku tahu aku ingin mendengar tawa itu sesering mungkin. Tawamu menjadi suara favoritku, senyumanmu menjadi pemandangan favoritku.</p>
+                    
+                    <p>Pertemuan pertama itu memantik sesuatu dalam diri kita berdua - rasa ingin tahu, ketertarikan yang tumbuh dengan setiap pertemuan berikutnya. Apa yang dimulai sebagai percakapan santai berubah menjadi obrolan larut malam, berbagi rahasia, dan kesadaran bertahap bahwa ini lebih dari sekadar persahabatan.</p>
+                    
+                    <p>Melihat ke belakang, aku sadar bahwa pertemuan pertama kita bukan hanya awal kisah kita, tapi saat hidupku benar-benar dimulai. Segala sesuatu sebelum kamu adalah persiapan, dan segala sesuatu setelahnya adalah petualangan yang aku syukuri untuk dibagi bersamamu.</p>
+                </div>
+                <div class="section-image">
+                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pertemuan pertama">
+                </div>
+            </div>
+        </section>
+
+        <section id="dating" class="section">
+            <h2>Pacaran kuy?gass.</h2>
+            <div class="section-content">
+                <div class="section-image">
+                    <img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Masa pacaran">
+                </div>
+                <div class="section-text">
+                    <p>Masa pacaran kita penuh dengan penemuan dan kegembiraan. Setiap kencan adalah kesempatan untuk mengenalmu lebih dalam, untuk jatuh cinta pada aspek lain dari kepribadianmu yang luar biasa. Dari kedai kopi hingga jalan-jalan di bawah sinar bulan, setiap momen bersama adalah harta karun.</p>
+                    
+                    <p>Aku ingat kencan resmi pertama kita - kegugupan yang menyenangkan, bagaimana tanganku gemetar saat meraih tanganmu, getaran listrik saat jari kita bertautan. Sentuhan sederhana itu terasa seperti pulang ke rumah, seperti menemukan tempat yang selalu seharusnya menjadi milikku.</p>
+                    
+                    <p>Aku ingat saat aku pertama kali mencium keningmu, aku ingat bagaimana bahagianya kita saat itu, bahagaimana reaksimu saat itu bahkan sampai nabrak kursi dan meja di kelas X wkwwkw. Aku ingat bagaimana kamu salting lalu atraksi nyundul hebel di Jembatan Sosrodilogo. Percayalah ingatan itu abadi.</p>
+
+                    <p>Seiring kita semakin dekat, kencan kita bukan lagi tentang mengesankan satu sama lain tapi sekadar bersama. Nonton film di rumah, bencana masak yang berubah menjadi kenangan penuh tawa, malam tenang berbicara tentang mimpi-mimpi kita - momen-momen biasa ini menjadi luar biasa karena kita mengalaminya bersama.</p>
+                    
+                    <p>Melalui perjalanan pacaran kita, kita membangun fondasi kepercayaan, penghargaan, dan kasih sayang yang dalam. Kita merayakan kemenangan masing-masing dan saling menghibur melalui tantangan. Dengan setiap hari yang berlalu, keyakinanku tumbuh - kamulah yang ingin kubagi hidupku.</p>
+                    
+                    <p>Melihat ke belakang masa pacaran kita, aku sadar itu adalah pembukaan indah untuk kehidupan yang lebih indah yang kita bangun bersama. Hari-hari awal menjalin hubungan itu menetapkan nada untuk hubungan yang penuh cinta, tawa, dan dukungan tanpa syarat.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="wedding" class="section">
+            <h2>Impian Pernikahan & Hidup Kita Bersama</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Hari Pernikahan</div>
+                        <p>Pernikahan kita adalah segala yang kita impikan dan lebih. Dikelilingi orang-orang tercinta, kita berjanji mengarungi hidup bersama di bawah rindangnya bunga-bunga. Cara kamu memandangku saat aku berjalan di lorong membuat napasku tertahan - momen itu selamanya terukir di hatiku.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Bulan Madu</div>
+                        <p>Bulan madu kita adalah waktu ajaib penuh penemuan dan pendalaman hubungan. Baik menjelajahi tempat baru atau sekadar menikmati kebersamaan, setiap momen dipenuhi cinta dan kebahagiaan memulai hidup bersama sebagai suami istri.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Rumah Pertama Kita</div>
+                        <p>Membangun rumah pertama bersama adalah petualangan penuh cinta dan tawa. Dari memilih warna cat hingga menata furnitur, setiap keputusan dibuat bersama, menciptakan ruang yang benar-benar mencerminkan kehidupan dan cinta kita.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Kabar Gembira Kehamilan</div>
+                        <p>Hari ketika kita tahu akan memiliki anak kembar adalah salah satu hari terbahagia dalam hidup kita. Melihat perutmu membesar dengan dua bayi mungil adalah mukjizat yang membuat kita semakin dekat.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Verdhyaksa Devananta Aryendra (Dev) & Dyneshcara Aluna Mireille (Luna)</div>
+                        <p>Kelahiran anak kembar kita melengkapi keluarga kita dengan cara yang tak pernah kita bayangkan. Dev, dengan matanya yang penuh rasa ingin tahu dan jiwa petualang, dan Luna, dengan jiwa lembut dan senyumannya yang menawan - mereka adalah perpaduan sempurna dari kita berdua, ciptaan terhebat kita.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Kehidupan Keluarga</div>
+                        <p>Membesarkan anak kembar kita adalah tantangan paling berharga yang pernah kita hadapi. Dari langkah pertama hingga pentas sekolah, dari luka kecil hingga wisuda, kita menjalani pengasuhan anak bersama, cinta kita semakin kuat dengan setiap tahun yang berlalu.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Masa Tua Bahagia</div>
+                        <p>Saat kita menua bersama, cinta kita justru semakin dalam. Melihat anak-anak kita memulai keluarga mereka sendiri, kita kagum pada kehidupan indah yang kita ciptakan. Bahkan dengan uban dan keriput, kamu tetap orang tercantik yang kukenal.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Hari-Hari Terakhir</div>
+                        <p>Saat tiba waktunya bagi kita untuk pergi dari dunia ini, kita melakukannya seperti kita hidup - bersama. Berpegangan tangan, dikelilingi keluarga tercinta, kita mengucapkan selamat tinggal pada kehidupan ini dengan keyakinan akan bertemu lagi di kehidupan berikutnya. Nisan kita bertuliskan: "Bersama dalam hidup, bersama dalam keabadian."</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-content" style="margin-top: 50px;">
+                <div class="section-text">
+                    <p>Pernikahan impian kita hanyalah awal dari seumur hidup cinta dan kebahagiaan. Melalui semua tahun, melalui semua tantangan dan sukacita, cinta kita tetap konstan, fondasi yang kita bangun untuk kehidupan indah kita bersama.</p>
+                    <p>Melihat anak-anak kita tumbuh menjadi individu luar biasa adalah kebanggaan terbesar kita. Dev, dengan pikiran tajam dan hati baik, menjadi pemimpin di bidangnya, selalu mengingat nilai-nilai yang kita tanamkan. Luna, dengan jiwa kreatif dan kasih sayangnya, menyentuh banyak hidup dengan seni dan filantropinya.</p>
+                    <p>Sebagai kakek nenek, kita senang mewariskan kisah cinta kita ke generasi baru. Cucu-cucu kita akan duduk terpana saat kita bercerita bagaimana kita bertemu, jatuh cinta, dan membangun keluarga luar biasa ini. Mereka akan tertawa melihat foto-foto lama kita dan takjub melihat betapa muda kita dulu.</p>
+                    <p>Melalui semua musim kehidupan - tahun-tahun sibuk mengasuh anak, pencapaian karier yang memuaskan, masa pensiun yang damai - cinta kita tak pernah goyah. Malahan, semakin kuat, semakin dalam, semakin berharga dengan setiap hari yang berlalu.</p>
+                    <p>Di masa tua kita, kita sering duduk di beranda, berpegangan tangan dan menatap matahari terbenam, seperti saat kita masih muda. Cinta di matamu sama seperti pada hari pernikahan kita, hanya sekarang dipenuhi seumur hidup kenangan bersama.</p>
+                    <p>Saat penyakit datang, kita menghadapinya bersama, seperti kita menghadapi segalanya. Anak-anak kita, sekarang dewasa dengan keluarga sendiri, berkumpul di sekitar kita, bukti hidup dari cinta kita. Pada saat-saat terakhir, kita berbisik cinta satu sama lain, seperti yang kita lakukan setiap hari dalam pernikahan kita.</p>
+                    <p>Pemakaman kita adalah perayaan cinta yang tak pernah berakhir. Dev dan Luna berbicara tentang cinta yang kita contohkan, tentang rumah yang kita bangun bersama, tentang warisan yang kita tinggalkan. Saat abu kita bercampur dan dikubur di bawah semak mawar, keluarga kita tahu kita masih bersama, seperti selalu.</p>
+                    <p>Kini, pengunjung makam kita sering berkomentar tentang mawar indah yang tumbuh di sana, kelopaknya perpaduan sempurna merah muda dan putih. Beberapa bilang jika kau mendengarkan dengan seksama di senja yang sunyi, kau bisa mendengar tawa - tawamu dan tawaku - terbawa angin, masih bersama, masih mencintai, melampaui batas waktu.</p>
+                    <p>Kisah cinta kita tidak berakhir dengan kematian kita, karena cinta sejati tidak pernah benar-benar berakhir. Cinta itu hidup dalam anak-anak kita, cucu-cucu kita, dan kenangan semua yang mengenal kita. Dan di suatu tempat, dalam bentuk tertentu, aku yakin kita telah menemukan satu sama lain lagi, seperti yang selalu akan terjadi.</p>
+                    <p>Inilah kisah cinta kita - tidak sempurna, berantakan, indah, dan sepenuhnya milik kita. Dan jika diberi kesempatan untuk mengulanginya lagi, aku akan memilihmu setiap kali, di setiap kehidupan, selamanya.</p>
+                </div>
+                <div class="section-image">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pernikahan">
+                </div>
+            </div>
+        </section>
+        <section id="quotes" class="section">
+            <h2>Kutipan Cinta Abadi</h2>
+            <div class="quote-container">
+                <div class="quote-card">
+                    <p class="quote-text">Cinta bukan tentang berapa hari, minggu atau bulan kalian bersama, tapi tentang seberapa besar kalian saling mencintai setiap hari.</p>
+                    <p class="quote-author">- Tidak Dikenal</p>
+                </div>
+                <div class="quote-card">
+                    <p class="quote-text">Di seluruh dunia, tidak ada hati untukku seperti hatimu. Di seluruh dunia, tidak ada cinta untukmu seperti cintaku.</p>
+                    <p class="quote-author">- Maya Angelou</p>
+                </div>
+                <div class="quote-card">
+                    <p class="quote-text">Hal terbaik yang bisa dipegang dalam hidup adalah satu sama lain.</p>
+                    <p class="quote-author">- Audrey Hepburn</p>
+                </div>
+                <div class="quote-card">
+                    <p class="quote-text">Aku melihat bahwa kamu sempurna, dan karena itu aku mencintaimu. Lalu aku melihat bahwa kamu tidak sempurna dan aku mencintaimu lebih lagi.</p>
+                    <p class="quote-author">- Angelita Lim</p>
+                </div>
+                <div class="quote-card">
+                    <p class="quote-text">Cinta terdiri dari satu jiwa yang menghuni dua tubuh.</p>
+                    <p class="quote-author">- Aristoteles</p>
+                </div>
+                <div class="quote-card">
+                    <p class="quote-text">Mencintai dan dicintai adalah merasakan matahari dari kedua sisi.</p>
+                    <p class="quote-author">- David Viscott</p>
+                </div>
+                <div class="quote-card">
+                    <p class="quote-text">Tuailah bersamaku! Yang terbaik masih akan datang.</p>
+                    <p class="quote-author">- Robert Browning</p>
+                </div>
+                <div class="quote-card">
+                    <p class="quote-text">Cinta tidak membuat dunia berputar. Cinta adalah yang membuat perjalanan berharga.</p>
+                    <p class="quote-author">- Franklin P. Jones</p>
+                </div>
+                <div class="quote-card">
+                    <p class="quote-text">Kita mencintai dengan cinta yang lebih dari sekadar cinta.</p>
+                    <p class="quote-author">- Edgar Allan Poe</p>
+                </div>
+                <div class="quote-card">
+                    <p class="quote-text">Cinta adalah ketika kebahagiaan orang lain lebih penting daripada kebahagiaanmu sendiri.</p>
+                    <p class="quote-author">- H. Jackson Brown Jr.</p>
+                </div>
+                <div class="quote-card">
+                    <p class="quote-text">Kebahagiaan terbesar dalam hidup adalah keyakinan bahwa kita dicintai; dicintai karena diri kita sendiri, atau lebih tepatnya, dicintai meskipun diri kita sendiri.</p>
+                    <p class="quote-author">- Victor Hugo</p>
+                </div>
+                <div class="quote-card">
+                    <p class="quote-text">Cinta adalah persahabatan yang menyala. Itu adalah pengertian diam, saling percaya, berbagi dan memaafkan. Itu adalah kesetiaan dalam suka dan duka. Itu menerima kurang dari kesempurnaan dan membuat kelonggaran untuk kelemahan manusia.</p>
+                    <p class="quote-author">- Ann Landers</p>
+                </div>
+            </div>
+        </section>
+        <section id="love-meter" class="section">
+            <h2>Love Meter</h2>
+            <div class="section-content" style="display: block; text-align: center;">
+                <p>Masukkan nama dan zodiak kalian untuk melihat persentase kecocokan!</p>
+                <div class="love-meter-form" style="max-width: 600px; margin: 30px auto; padding: 30px; background-color: var(--white-primary); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div class="form-group">
+                        <label for="yourName">Namamu</label>
+                        <input type="text" id="yourName" placeholder="Masukkan namamu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="partnerName">Nama Pasanganmu</label>
+                        <input type="text" id="partnerName" placeholder="Masukkan nama pasanganmu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="yourZodiac">Zodiakmu</label>
+                        <select id="yourZodiac" required>
+                            <option value="">Pilih zodiakmu</option>
+                            <option value="Aries">Aries</option>
+                            <option value="Taurus">Taurus</option>
+                            <option value="Gemini">Gemini</option>
+                            <option value="Cancer">Cancer</option>
+                            <option value="Leo">Leo</option>
+                            <option value="Virgo">Virgo</option>
+                            <option value="Libra">Libra</option>
+                            <option value="Scorpio">Scorpio</option>
+                            <option value="Sagittarius">Sagittarius</option>
+                            <option value="Capricorn">Capricorn</option>
+                            <option value="Aquarius">Aquarius</option>
+                            <option value="Pisces">Pisces</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="partnerZodiac">Zodiak Pasanganmu</label>
+                        <select id="partnerZodiac" required>
+                            <option value="">Pilih zodiak pasanganmu</option>
+                            <option value="Aries">Aries</option>
+                            <option value="Taurus">Taurus</option>
+                            <option value="Gemini">Gemini</option>
+                            <option value="Cancer">Cancer</option>
+                            <option value="Leo">Leo</option>
+                            <option value="Virgo">Virgo</option>
+                            <option value="Libra">Libra</option>
+                            <option value="Scorpio">Scorpio</option>
+                            <option value="Sagittarius">Sagittarius</option>
+                            <option value="Capricorn">Capricorn</option>
+                            <option value="Aquarius">Aquarius</option>
+                            <option value="Pisces">Pisces</option>
+                        </select>
+                    </div>
+                    <button type="button" class="calculate-button" onclick="calculateLove()">Hitung Kecocokan</button>
+                    <div id="loveMeterResult" class="love-meter-results" style="display: none;">
+                        <h3>Hasil Kecocokan Cinta</h3>
+                        <div class="result-item">
+                            <p>Tingkat Kecocokan: <strong id="compatibilityScore">0%</strong></p>
+                        </div>
+                        <div class="result-item">
+                            <p id="compatibilityMessage"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="knowledge-quiz" class="section">
+            <h2>Kuis Pengetahuan Pasangan</h2>
+            <div class="quiz-form">
+                <form id="quizForm">
+                    <div class="quiz-question">
+                        <p>Apa warna favorit pasanganmu?</p>
+                        <div class="input-group">
+                            <div>
+                                <label for="answer1">Jawabanku:</label>
+                                <input type="text" id="answer1" placeholder="Masukkan jawabanmu">
+                            </div>
+                            <div>
+                                <label for="partnerAnswer1">Jawaban Pasangan:</label>
+                                <input type="text" id="partnerAnswer1" placeholder="Jawaban pasangan">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quiz-question">
+                        <p>Di mana kencan pertama kita?</p>
+                        <div class="input-group">
+                            <div>
+                                <label for="answer2">Jawabanku:</label>
+                                <input type="text" id="answer2" placeholder="Masukkan jawabanmu">
+                            </div>
+                            <div>
+                                <label for="partnerAnswer2">Jawaban Pasangan:</label>
+                                <input type="text" id="partnerAnswer2" placeholder="Jawaban pasangan">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quiz-question">
+                        <p>Apa film pertama yang kita tonton bersama?</p>
+                        <div class="input-group">
+                            <div>
+                                <label for="answer3">Jawabanku:</label>
+                                <input type="text" id="answer3" placeholder="Masukkan jawabanmu">
+                            </div>
+                            <div>
+                                <label for="partnerAnswer3">Jawaban Pasangan:</label>
+                                <input type="text" id="partnerAnswer3" placeholder="Jawaban pasangan">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="quiz-button">Kirim Jawaban</button>
+                </form>
+                <div id="quizResults" class="quiz-results" style="display: none;">
+                    <h3>Hasil Kuis</h3>
+                    <div class="result-item">
+                        <p>Skormu: <strong id="yourQuizScore">0</strong></p>
+                    </div>
+                    <div class="result-item">
+                        <p>Skor Pasangan: <strong id="partnerQuizScore">0</strong></p>
+                    </div>
+                    <div class="quiz-results-detail">
+                        <h4>Detail Jawaban</h4>
+                        <ul>
+                            <li>Pertanyaan 1: <span id="q1Detail"></span></li>
+                            <li>Pertanyaan 2: <span id="q2Detail"></span></li>
+                            <li>Pertanyaan 3: <span id="q3Detail"></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="s_g_s_c_game" class="section">
+            <h2>Si Ganteng & Si Cantik Game</h2>
+            <div class="game-area">
+                <p>Siapa yang paling cantik di antara kita?</p>
+                <div class="game-choices">
+                    <div class="game-choice-item" onclick="selectChoice('sicantik')">
+                        <img src="https://images.unsplash.com/photo-1549247717-3d964f40f09a?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" alt="Si Cantik">
+                        <span>Si Cantik</span>
+                    </div>
+                    <div class="game-choice-item" onclick="selectChoice('siganteng')">
+                        <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" alt="Si Ganteng">
+                        <span>Si Ganteng</span>
+                    </div>
+                </div>
+                <p id="gameMessage" class="game-message"></p>
+                <button class="game-button" onclick="resetGame()" style="display: none;">Main Lagi</button>
+            </div>
+        </section>
+        
+        <section id="reunion-game" class="section">
+            <h2>Can We Get Back Together?</h2>
+            <div class="reunion-game-area">
+                <p>Setelah sekian lama berpisah, akankah takdir menyatukan kita kembali?</p>
+                <div class="reunion-game-choices">
+                    <button id="reunionYes" onclick="checkReunion('yes')">Ya</button>
+                    <button id="reunionNo" onclick="checkReunion('no')">Tidak</button>
+                </div>
+                <p id="reunionGameMessage" class="reunion-game-message"></p>
+            </div>
+        </section>
+
+        <section id="mood-booster" class="section">
+            <h2>Mood Booster</h2>
+            <div class="mood-booster-area">
+                <p>Bagaimana perasaanku?</p>
+                <div class="mood-booster-choices">
+                    <button onclick="startMoodBooster('happy')">Happy</button>
+                    <button onclick="startMoodBooster('sad')">Sad</button>
+                    <button onclick="startMoodBooster('anxious')">Anxious</button>
+                </div>
+                <div id="moodBoosterContent" class="mood-booster-content" style="display: none;">
+                    <div class="mood-booster-question"></div>
+                    <div class="mood-booster-input-group">
+                        <label for="moodBoosterAnswerInput">Jawabanmu:</label>
+                        <input type="text" id="moodBoosterAnswerInput" placeholder="Ketik jawabanmu di sini">
+                    </div>
+                    <p id="moodBoosterAnswer" class="mood-booster-answer"></p>
+                    <div class="mood-booster-navigation-buttons">
+                        <button id="moodBoosterPrev" onclick="prevMoodQuestion()">Kembali</button>
+                        <button id="moodBoosterNext" onclick="nextMoodQuestion()">Lanjut</button>
+                    </div>
+                    <p id="moodBoosterFinalMessage" class="mood-booster-final-message"></p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Cerita Cinta Kita. Dibuat dengan <i class="fas fa-heart"></i></p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const errorMessage = document.getElementById('errorMessage');
+            const loginContainer = document.querySelector('.login-container');
+            const mainContent = document.querySelector('.main-content');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.section');
+            const loveMeterResult = document.getElementById('loveMeterResult');
+            const loveMeterForm = document.querySelector('.love-meter-form');
+            const calculateButton = document.querySelector('.calculate-button');
+
+            const validUsernames = ['dyna', 'dena', 'verdy', 'verdhy', 'verdhyaksa', 'ferdy'];
+            const correctPassword = '06102021';
+
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = usernameInput.value.toLowerCase().trim();
+                const password = passwordInput.value.trim();
+
+                if (validUsernames.includes(username) && password === correctPassword) {
+                    loginContainer.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                    showSection('home');
+                } else {
+                    errorMessage.style.display = 'block';
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navLinks.forEach(nav => nav.parentElement.classList.remove('active'));
+                    this.parentElement.classList.add('active');
+                    const sectionId = this.getAttribute('data-section');
+                    showSection(sectionId);
+                });
+            });
+
+            function showSection(id) {
+                sections.forEach(section => {
+                    if (section.id === id) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+                
+                // Hide Love Meter results when switching sections
+                if (id !== 'love-meter') {
+                    loveMeterResult.style.display = 'none';
+                }
+            }
+
+            // Quiz logic
+            const quizForm = document.getElementById('quizForm');
+            const quizResults = document.getElementById('quizResults');
+            quizForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let yourScore = 0;
+                let partnerScore = 0;
+                
+                const answers = {
+                    q1: {
+                        correct: 'merah muda'
+                    },
+                    q2: {
+                        correct: 'warung soto'
+                    },
+                    q3: {
+                        correct: 'titanic'
+                    }
+                };
+
+                const yourAnswer1 = document.getElementById('answer1').value.toLowerCase().trim();
+                const partnerAnswer1 = document.getElementById('partnerAnswer1').value.toLowerCase().trim();
+                if (yourAnswer1 === answers.q1.correct) yourScore++;
+                if (partnerAnswer1 === answers.q1.correct) partnerScore++;
+                
+                const yourAnswer2 = document.getElementById('answer2').value.toLowerCase().trim();
+                const partnerAnswer2 = document.getElementById('partnerAnswer2').value.toLowerCase().trim();
+                if (yourAnswer2 === answers.q2.correct) yourScore++;
+                if (partnerAnswer2 === answers.q2.correct) partnerScore++;
+                
+                const yourAnswer3 = document.getElementById('answer3').value.toLowerCase().trim();
+                const partnerAnswer3 = document.getElementById('partnerAnswer3').value.toLowerCase().trim();
+                if (yourAnswer3 === answers.q3.correct) yourScore++;
+                if (partnerAnswer3 === answers.q3.correct) partnerScore++;
+                
+                document.getElementById('yourQuizScore').textContent = yourScore;
+                document.getElementById('partnerQuizScore').textContent = partnerScore;
+                
+                document.getElementById('q1Detail').textContent = `Kamu: ${yourAnswer1}, Pasangan: ${partnerAnswer1} - Jawaban Benar: ${answers.q1.correct}`;
+                document.getElementById('q2Detail').textContent = `Kamu: ${yourAnswer2}, Pasangan: ${partnerAnswer2} - Jawaban Benar: ${answers.q2.correct}`;
+                document.getElementById('q3Detail').textContent = `Kamu: ${yourAnswer3}, Pasangan: ${partnerAnswer3} - Jawaban Benar: ${answers.q3.correct}`;
+
+                quizResults.style.display = 'block';
+            });
+        });
+
+        function calculateLove() {
+            const yourName = document.getElementById('yourName').value;
+            const partnerName = document.getElementById('partnerName').value;
+            const yourZodiac = document.getElementById('yourZodiac').value;
+            const partnerZodiac = document.getElementById('partnerZodiac').value;
+            const loveMeterResult = document.getElementById('loveMeterResult');
+            const compatibilityScore = document.getElementById('compatibilityScore');
+            const compatibilityMessage = document.getElementById('compatibilityMessage');
+
+            if (!yourName || !partnerName || !yourZodiac || !partnerZodiac) {
+                alert("Mohon isi semua kolom untuk menghitung kecocokan.");
+                return;
+            }
+
+            let score = 0;
+            let message = '';
+            
+            const normalizedYourName = yourName.toLowerCase().trim();
+            const normalizedPartnerName = partnerName.toLowerCase().trim();
+            const normalizedYourZodiac = yourZodiac.toLowerCase().trim();
+            const normalizedPartnerZodiac = partnerZodiac.toLowerCase().trim();
+
+            const dynaNames = ['dyna', 'dena', 'dyna mufita sari'];
+            const ferdyNames = ['ferdy', 'verdy', 'verdhy', 'verdhyaksa', 'ferdiansyah', 'muhammad nanda ferdiansyah'];
+            const geminiZodiac = 'gemini';
+            const leoZodiac = 'leo';
+
+            // Check for the special case
+            const isSpecialNameMatch = 
+                (dynaNames.includes(normalizedYourName) && ferdyNames.includes(normalizedPartnerName)) ||
+                (ferdyNames.includes(normalizedYourName) && dynaNames.includes(normalizedPartnerName));
+
+            const isSpecialZodiacMatch =
+                (normalizedYourZodiac === geminiZodiac && normalizedPartnerZodiac === leoZodiac) ||
+                (normalizedYourZodiac === leoZodiac && normalizedPartnerZodiac === geminiZodiac);
+            
+            if (isSpecialNameMatch || isSpecialZodiacMatch) {
+                score = 1000;
+                message = 'Kecocokan kalian di luar nalar! Sungguh takdir yang luar biasa!';
+            } else {
+                // Original random logic for other cases
+                score = Math.floor(Math.random() * 100) + 1;
+                if (score >= 90) {
+                    message = 'Kalian adalah pasangan yang sangat sempurna! Takdir telah menyatukan kalian.';
+                } else if (score >= 70) {
+                    message = 'Hubungan kalian sangat kuat. Teruslah jaga cinta kalian!';
+                } else if (score >= 50) {
+                    message = 'Ada potensi besar dalam hubungan kalian. Komunikasi adalah kunci.';
+                } else {
+                    message = 'Cinta perlu kerja keras, tapi kalian bisa melakukannya.';
+                }
+            }
+
+            compatibilityScore.textContent = `${score}%`;
+            compatibilityMessage.textContent = message;
+            loveMeterResult.style.display = 'block';
+        }
+
+        function selectChoice(choice) {
+            const gameMessage = document.getElementById('gameMessage');
+            const resetButton = document.querySelector('.game-button');
+            if (choice === 'sicantik') {
+                gameMessage.textContent = 'Kamu benar! Si Cantik memang yang paling cantik.';
+                gameMessage.classList.add('win');
+                gameMessage.classList.remove('lose');
+            } else {
+                gameMessage.textContent = 'Oops, coba lagi! Jawabannya salah.';
+                gameMessage.classList.remove('win');
+                gameMessage.classList.add('lose');
+            }
+            resetButton.style.display = 'block';
+        }
+
+        function resetGame() {
+            const gameMessage = document.getElementById('gameMessage');
+            const resetButton = document.querySelector('.game-button');
+            gameMessage.textContent = '';
+            gameMessage.classList.remove('win', 'lose');
+            resetButton.style.display = 'none';
+        }
+        
+        function checkReunion(answer) {
+            const reunionGameMessage = document.getElementById('reunionGameMessage');
+            if (answer === 'yes') {
+                reunionGameMessage.textContent = 'Tentu saja! Kisah cinta sejati takkan pernah berakhir.';
+                reunionGameMessage.classList.add('win');
+                reunionGameMessage.classList.remove('lose');
+            } else {
+                reunionGameMessage.textContent = 'Jangan sedih, takdir punya rencana lain untukmu.';
+                reunionGameMessage.classList.remove('win');
+                reunionGameMessage.classList.add('lose');
+            }
+        }
+        
+        let currentMoodQuestionIndex = 0;
+        const moodQuestions = {
+            'happy': [
+                "Ceritakan satu momen lucu yang kamu alami hari ini.",
+                "Apa hal terbaik yang terjadi padamu minggu ini?",
+                "Siapa orang yang membuatmu tersenyum hari ini?"
+            ],
+            'sad': [
+                "Apa yang membuatmu sedih? Kamu bisa cerita padaku.",
+                "Ingatlah satu kenangan indah yang kita punya bersama.",
+                "Apa satu hal yang bisa aku lakukan untuk membuatmu merasa lebih baik?"
+            ],
+            'anxious': [
+                "Tarik napas dalam-dalam. Apa yang ada di pikiranmu saat ini?",
+                "Mari kita fokus pada hal-hal yang bisa kamu kendalikan. Apa itu?",
+                "Ingat, kamu tidak sendirian. Kita bisa melewati ini bersama."
+            ]
+        };
+        
+        let selectedMood = '';
+
+        function startMoodBooster(mood) {
+            selectedMood = mood;
+            currentMoodQuestionIndex = 0;
+            document.querySelector('.mood-booster-choices').style.display = 'none';
+            document.getElementById('moodBoosterContent').style.display = 'block';
+            showMoodQuestion();
+        }
+        
+        function showMoodQuestion() {
+            const questionElement = document.querySelector('.mood-booster-question');
+            const inputGroup = document.querySelector('.mood-booster-input-group');
+            const answerElement = document.getElementById('moodBoosterAnswer');
+            const prevButton = document.getElementById('moodBoosterPrev');
+            const nextButton = document.getElementById('moodBoosterNext');
+            const finalMessage = document.getElementById('moodBoosterFinalMessage');
+            
+            questionElement.textContent = moodQuestions[selectedMood][currentMoodQuestionIndex];
+            document.getElementById('moodBoosterAnswerInput').value = '';
+            answerElement.textContent = '';
+            
+            prevButton.style.display = currentMoodQuestionIndex > 0 ? 'block' : 'none';
+            nextButton.textContent = currentMoodQuestionIndex < moodQuestions[selectedMood].length - 1 ? 'Lanjut' : 'Selesai';
+            finalMessage.style.display = 'none';
+        }
+        
+        function nextMoodQuestion() {
+            if (currentMoodQuestionIndex < moodQuestions[selectedMood].length - 1) {
+                currentMoodQuestionIndex++;
+                showMoodQuestion();
+            } else {
+                // End of quiz
+                document.getElementById('moodBoosterContent').style.display = 'none';
+                document.querySelector('.mood-booster-choices').style.display = 'flex';
+                document.getElementById('moodBoosterFinalMessage').textContent = 'Terima kasih telah berbagi! Semoga kamu merasa lebih baik.';
+                document.getElementById('moodBoosterFinalMessage').style.display = 'block';
+            }
+        }
+        
+        function prevMoodQuestion() {
+            if (currentMoodQuestionIndex > 0) {
+                currentMoodQuestionIndex--;
+                showMoodQuestion();
+            }
+        }
+    </script>
+</body>
+</html>
